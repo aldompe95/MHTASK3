@@ -54,6 +54,18 @@ function deleteMarkers() {
 google.maps.event.addDomListener(window, 'load', initMap);
 
 // Distance feature
+function printDistance(){
+  if(markersCoordinates.length == 3){
+    let html;
+    html = `<li> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[1].lat(),markersCoordinates[1].lng())}KM</li>`;
+    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
+    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
+    document.querySelector('#output').innerHTML = html;
+  }else{
+    alert("You must select at least 3 locations");
+  }
+}
+
 // Haversine formula  
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2){
   var R = 6371; // Radius of the earth in km

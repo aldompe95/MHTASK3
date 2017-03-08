@@ -19,7 +19,12 @@ function initMap(){
 
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event){
-    addMarker(event.latLng, map);
+    if(countMarkersInMap < maxMarkersInMap){ // add the if so the user can set more than 3 markers
+      addMarker(event.latLng, map);
+      countMarkersInMap++;
+    }else{
+      alert("There already 3 markers in map");
+    }
   });
 }
 

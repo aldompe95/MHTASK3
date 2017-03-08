@@ -4,11 +4,48 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <title>Geolocation</title>
+  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDfQ1HXyCuRC0PLH8__bnR49kdmjNzObo"></script>
   <script type="text/javascript" src="geolocation.js"></script>
 </head>
 <body>
+  <!-- This is the navbar section -->
+  <!--  NavBar-Fixed is the class for the nav to be fixed in top even after you scroll -->
+    <div class="navbar-fixed">
+      <nav class="teal darken-1">
+        <div class="nav-wrapper">
+          <a href="#index" class="brand-logo center waves-effect">MagmaHackers</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#about" class="waves-effect">About me</a></li>
+            <li><a href="#hobbies" class="waves-effect">Hobbies</a></li>
+            <li><a href="#dreams" class="waves-effect">Dreams</a></li>
+            <li><a href="#contact" class="waves-effect">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <ul class="side-nav" id="mobile-demo">
+      <li class="userView valign-wrapper">
+        <div class="background">
+          <img src="images/background.jpg">
+        </div>
+        <a href=""><span class="white-text name center"><h2 class="valign">Ulises' Lair</h2></span></a>
+        <br>
+      </li>
+      <li><a href="#about" class="waves-effect">About me</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#hobbies" class="waves-effect">Hobbies</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#dreams" class="waves-effect">Dreams</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#contact" class="waves-effect">Contact</a></li>
+      <li><div class="divider"></div></li>
+    </ul>
+
   <div id="map"></div>
   <button onclick="deleteMarkers()">Delete markers</button>
   <button onclick="printDistance()">Get distance</button>
@@ -16,5 +53,36 @@
     <ul id="output">
     </ul>
   </div>
+
+  <!-- Footer section -->
+  <footer id="contact" class="page-footer teal darken-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Contact info</h5>
+          <p class="grey-text text-lighten-4">Ulises Avila Camargo</p>
+          <p class="grey-text text-lighten-4">Email: ulisesavila04@gmail.com</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="#about">About me</a></li>
+              <li><a class="grey-text text-lighten-3" href="#hobbies">Hobbies</a></li>
+              <li><a class="grey-text text-lighten-3" href="#dreams">Dreams</a></li>
+              <li><a class="grey-text text-lighten-3" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+          <div class="footer-copyright teal darken-2">
+            <div class="container">
+            © 2016 Made with <a href="http://www.materializecss.com">Materilizecss</a>
+            <a class="grey-text text-lighten-4 right" href="#index">MagmaHackers</a>
+            </div>
+          </div>
+    </footer>
+  <script type="text/javascript" src="res/jquery.js"></script>
+  <script type="text/javascript" src="materialize/js/materialize.js"></script>
+  <script type="text/javascript" src="res/resources.js"></script>
 </body>
 </html>

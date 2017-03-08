@@ -41,4 +41,14 @@ function addMarker(location, map){
   markers.push(marker);
 }
 
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+  markers = [];
+  markersCoordinates = [];
+  countMarkersInMap = 0;
+}
+
 google.maps.event.addDomListener(window, 'load', initMap);

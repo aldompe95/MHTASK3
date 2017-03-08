@@ -61,6 +61,8 @@ function printDistance(){
     html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
     html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
     document.querySelector('#output').innerHTML = html;
+    setCoordinatesDrawing();
+    drawLines();
   }else{
     alert("You must select at least 3 locations");
   }
@@ -83,4 +85,27 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2){
 
 function deg2rad(deg){
   return deg * (Math.PI/180)
+}
+
+// DrawLines feature
+let path;
+
+function drawLines(){
+  let line = new google.maps.Polyline({
+    path: path,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+  console.log(line);
+  line.setMap(map);
+}
+
+function setCoordinatesDrawing(){
+  path = [];
+  for (let i = 0; i < markersCoordinates.length; i++){
+    path.push({lat: markersCoordinates[i].lat(), lng: markersCoordinates[i].lng()});
+  }
+  path.push({lat: markersCoordinates[0].lat(), lng: markersCoordinates[0].lng()});
 }

@@ -16,16 +16,30 @@ function initMap(){
 	zoom: 13,
 	center: colima
     });
+    changeStreetView(colima, map);
 
     // This event listener calls addMarker() when the map is clicked.
     google.maps.event.addListener(map, 'click', function(event){
 	if(countMarkersInMap < maxMarkersInMap){ // add the if so the user can set more than 3 markers
 	    addMarker(event.latLng, map);
 	    countMarkersInMap++;
+	    changeStreetView(event.latLng, map);
 	}else{
 	    alert("There already 3 markers in map");
 	}
     });
+}
+
+function changeStreetView(location, map) {
+    let panorama = new google.maps.StreetViewPanorama(
+	document.getElementById('pano'), {
+	    position: location,
+	    pov: {
+		heading: 0,
+		pitch: 0
+	    }
+	});
+    map.setStreetView(panorama);
 }
 
 // Adds a marker to the map.

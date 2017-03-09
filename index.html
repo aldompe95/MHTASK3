@@ -14,37 +14,13 @@
   <!-- This is the navbar section -->
   <!--  NavBar-Fixed is the class for the nav to be fixed in top even after you scroll -->
     <div class="navbar-fixed">
-      <nav class="grey darken-4">
+      <nav class="light-blue darken-4">
         <div class="nav-wrapper">
           <a href="#index" class="brand-logo center waves-effect">MagmaHackers</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#about" class="waves-effect">About me</a></li>
-            <li><a href="#hobbies" class="waves-effect">Hobbies</a></li>
-            <li><a href="#dreams" class="waves-effect">Dreams</a></li>
-            <li><a href="#contact" class="waves-effect">Contact</a></li>
-          </ul>
         </div>
       </nav>
     </div>
 
-    <ul class="side-nav" id="mobile-demo">
-      <li class="userView valign-wrapper">
-        <div class="background">
-          <img src="images/background.jpg">
-        </div>
-        <a href=""><span class="white-text name center"><h2 class="valign">Ulises' Lair</h2></span></a>
-        <br>
-      </li>
-      <li><a href="#about" class="waves-effect">About me</a></li>
-      <li><div class="divider"></div></li>
-      <li><a href="#hobbies" class="waves-effect">Hobbies</a></li>
-      <li><div class="divider"></div></li>
-      <li><a href="#dreams" class="waves-effect">Dreams</a></li>
-      <li><div class="divider"></div></li>
-      <li><a href="#contact" class="waves-effect">Contact</a></li>
-      <li><div class="divider"></div></li>
-    </ul>
 <!-- Here is located the main content of the page, header and main content -->
   <div class="container">
     <div class="row card-panel">
@@ -52,7 +28,8 @@
         <!-- Header section -->
         <header>
           <div class="section">
-            <h1 class="center">MagmaHackers third assignment</h1>
+            <h1 class="header center orange-text">MagmaHackers third assignment</h1>
+            <h3 class="center orange-text">Map, geolocation and more</h3>
           </div>
         </header>
         <div class="divider"></div>
@@ -60,10 +37,13 @@
         <main>
           <div class="section">
             <div id="map"></div>
-            <button onclick="deleteMarkers()">Delete markers</button>
-            <button onclick="printDistance()">Get distance</button>
+            <br>
+            <div class="col s4 offset-s4">
+              <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
+              <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
+            </div>
             <div>
-              <ul id="output" class="collection">
+              <ul id="output" class="collection col s6 offset-s3 grey lighten-3">
               </ul>
             </div>
           </div>
@@ -73,7 +53,7 @@
   </div>
 
   <!-- Footer section -->
-  <footer id="contact" class="footer-copyright grey darken-4 white-text">
+  <footer id="contact" class="footer-copyright light-blue darken-4 white-text">
     <div class="section">
         <div class="container">
         © 2016 Made with <a href="http://www.materializecss.com">Materilizecss</a>

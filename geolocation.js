@@ -10,6 +10,8 @@ let markersCoordinates = [];
 
 let map;
 
+let notification = new Audio('bip.wav');
+
 function initMap(){
   let colima = { lat: 19.2453576, lng: -103.7317546 };
   map = new google.maps.Map(document.getElementById('map'), {
@@ -21,6 +23,7 @@ function initMap(){
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event){
     if(countMarkersInMap < maxMarkersInMap){ // add the if so the user can set more than 3 markers
+      notification.play();
       addMarker(event.latLng, map);
       countMarkersInMap++;
       changeStreetView(event.latLng, map);

@@ -60,9 +60,9 @@ let isAlready = 0;
 function printDistance(){
   if(markersCoordinates.length >= 3){
     let html;
-    html = `<li> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0],markersCoordinates[1])}KM</li>`;
-    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0],markersCoordinates[2])}KM</li>`;
-    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1], markersCoordinates[2])}KM</li>`;
+    html = `<li class="collection-item grey lighten-3"> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0],markersCoordinates[1])}KM</li>`;
+    html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0],markersCoordinates[2])}KM</li>`;
+    html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1],markersCoordinates[2])}KM</li>`;
     document.querySelector('#output').innerHTML = html;
     markersCoordinates.push(markersCoordinates[0]); // to close the triangle drawing
     drawLines();

@@ -57,26 +57,26 @@ google.maps.event.addDomListener(window, 'load', initMap);
 function printDistance(){
   if(markersCoordinates.length == 3){
     let html;
-    html = `<li> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[1].lat(),markersCoordinates[1].lng())}KM</li>`;
-    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
-    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
+    html = `<li class="collection-item grey lighten-3"> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[1].lat(),markersCoordinates[1].lng())}KM</li>`;
+    html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
+    html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
     document.querySelector('#output').innerHTML = html;
   }else{
     alert("You must select at least 3 locations");
   }
 }
-  
+
 // Haversine formula
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2){
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1); 
-  var a = 
+  var dLon = deg2rad(lon2-lon1);
+  var a =
     Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
     Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var d = R * c; // Distance in km
   return d;
 }

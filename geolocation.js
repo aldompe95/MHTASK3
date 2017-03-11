@@ -11,6 +11,8 @@ let markersCoordinates = [];
 let map;
 
 let notification = new Audio('bip.wav');
+let streetViewService = new google.maps.StreetViewService();
+let STREET_VIEW_MAXDISTANCE = 200;
 
 function initMap(){
   let colima = { lat: 19.2453576, lng: -103.7317546 };
@@ -34,15 +36,17 @@ function initMap(){
 }
 
 function changeStreetView(location, map) {
-  let panorama = new google.maps.StreetViewPanorama(
-    document.getElementById('pano'), {
-      position: location,
-      pov: {
-	heading: 0,
-	pitch: 0
-      }
-    });
-  map.setStreetView(panorama);
+  streetViewService.getPanoramaByLocation(location, STREET_VIEW_MAXDISTANCE, checkPanorama);
+}
+
+function checkPanorama(data, status) {
+  if (status == google.maps.StreetViewStatus.OK) {
+    let panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
+    panorama.setPano(data.location.pano);
+    panorama.setVisible(true);
+  } else {
+    console.error('Street View data not found for this location.');
+  }
 }
 
 // Adds a marker to the map.

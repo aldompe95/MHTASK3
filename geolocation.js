@@ -78,9 +78,9 @@ google.maps.event.addDomListener(window, 'load', initMap);
 function printDistance(){
   if(markersCoordinates.length == 3){
     let html;
-    html = `<li> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[1].lat(),markersCoordinates[1].lng())}KM</li>`;
-    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
-    html += `<li> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
+    html = `<li class="collection-item grey lighten-3"> Marker A to marker B: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[1].lat(),markersCoordinates[1].lng())}KM</li>`;
+    html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
+    html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
     document.querySelector('#output').innerHTML = html;
   }else{
     alert("You must select at least 3 locations");

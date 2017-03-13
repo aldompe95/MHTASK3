@@ -5,6 +5,6 @@ html, body{
 }
 #map, #pano {
   float: left;
-  height: 50%;
+  height: 500px;
   width: 50%;
 }

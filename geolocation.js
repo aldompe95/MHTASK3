@@ -19,7 +19,7 @@ function initMap(){
 
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event){
-    if(countMarkersInMap < maxMarkersInMap){ // add the if so the user can set more than 3 markers
+    if(countMarkersInMap < maxMarkersInMap){ // user cant set more than 3 markers
       addMarker(event.latLng, map);
       countMarkersInMap++;
     }else{
@@ -38,7 +38,7 @@ function addMarker(location, map){
     map: map
   });
   markersCoordinates.push(location); // Save the direction of the marker
-  markers.push(marker);
+  markers.push(marker); // Save the marker
 }
 
 // Deletes all markers in the array by removing references to them.
@@ -61,6 +61,8 @@ function printDistance(){
     html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[0].lat(),markersCoordinates[0].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
     html += `<li class="collection-item grey lighten-3"> Marker A to marker C: ${getDistanceFromLatLonInKm(markersCoordinates[1].lat(),markersCoordinates[1].lng(),markersCoordinates[2].lat(),markersCoordinates[2].lng())}KM</li>`;
     document.querySelector('#output').innerHTML = html;
+    markersCoordinates.push(markersCoordinates[0]);
+    drawLines();
   }else{
     alert("You must select at least 3 locations");
   }
@@ -84,3 +86,19 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2){
 function deg2rad(deg){
   return deg * (Math.PI/180)
 }
+
+
+// DrawLines feature
+function drawLines(){
+  markersCoordinates.push(markersCoordinates[0]);
+  let line = new google.maps.Polyline({
+    path: markersCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+  line.setMap(map);
+}
+
+

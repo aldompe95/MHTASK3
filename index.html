@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
-  <title>Geolocation</title>
-  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
-  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDfQ1HXyCuRC0PLH8__bnR49kdmjNzObo"></script>
-  <script type="text/javascript" src="geolocation.js"></script>
-</head>
-<body class="grey lighten-2">
-  <!-- This is the navbar section -->
-  <!--  NavBar-Fixed is the class for the nav to be fixed in top even after you scroll -->
-    <div class="navbar-fixed">
-      <nav class="light-blue darken-4">
-        <div class="nav-wrapper">
-          <a href="#index" class="brand-logo center waves-effect">MagmaHackers</a>
-        </div>
-      </nav>
-    </div>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Geolocation</title>
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDfQ1HXyCuRC0PLH8__bnR49kdmjNzObo"></script>
+    <script type="text/javascript" src="geolocation.js"></script>
+  </head>
+  <body class="grey lighten-2">
+    <!-- This is the navbar section -->
+    <!--  NavBar-Fixed is the class for the nav to be fixed in top even after you scroll -->
+      <div class="navbar-fixed">
+        <nav class="light-blue darken-4">
+          <div class="nav-wrapper">
+            <a href="#index" class="brand-logo center waves-effect">MagmaHackers</a>
+          </div>
+        </nav>
+      </div>
 
-<!-- Here is located the main content of the page, header and main content -->
-  <div class="container">
-    <div class="row card-panel">
-      <div class="col s12 s6">
-        <!-- Header section -->
-        <header>
-          <div class="section">
-            <h1 class="header center orange-text">MagmaHackers third assignment</h1>
-            <h3 class="center orange-text">Map, geolocation and more</h3>
-          </div>
-        </header>
-        <div class="divider"></div>
-        <!-- Map section -->
-        <main>
-          <div class="section">
-            <div id="map"></div>
-            <br>
-            <div class="col s4 offset-s4">
-              <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
-              <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
+  <!-- Here is located the main content of the page, header and main content -->
+    <div class="container">
+      <div class="row card-panel">
+        <div class="col s12 s6">
+          <!-- Header section -->
+          <header>
+            <div class="section">
+              <h1 class="header center orange-text">MagmaHackers third assignment</h1>
+              <h3 class="center orange-text">Map, geolocation and more</h3>
             </div>
-            <div>
-              <ul id="output" class="collection col s6 offset-s3 grey lighten-3">
-              </ul>
+          </header>
+          <div class="divider"></div>
+          <!-- Map section -->
+          <main>
+            <div class="section">
+              <div id="map"></div>
+              <br>
+              <div class="col s4 offset-s4">
+                <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
+                <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
+              </div>
+              <div>
+                <ul id="output" class="collection col s6 offset-s3 grey lighten-3">
+                </ul>
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Footer section -->
-  <footer id="contact" class="footer-copyright light-blue darken-4 white-text">
-    <div class="section">
-        <div class="container">
-        © 2016 Made with <a href="http://www.materializecss.com">Materilizecss</a>
-        <a class="grey-text text-lighten-4 right" href="#index">MagmaHackers</a>
-        </div>
-    </div>
-    </footer>
-  <script type="text/javascript" src="res/jquery.js"></script>
-  <script type="text/javascript" src="materialize/js/materialize.js"></script>
-  <script type="text/javascript" src="res/resources.js"></script>
-</body>
+    <!-- Footer section -->
+    <footer id="contact" class="footer-copyright light-blue darken-4 white-text">
+      <div class="section">
+          <div class="container">
+          © 2016 Made with <a href="http://www.materializecss.com">Materilizecss</a>
+          <a class="grey-text text-lighten-4 right" href="#index">MagmaHackers</a>
+          </div>
+      </div>
+      </footer>
+    <script type="text/javascript" src="res/jquery.js"></script>
+    <script type="text/javascript" src="materialize/js/materialize.js"></script>
+    <script type="text/javascript" src="res/resources.js"></script>
+  </body>
 </html>

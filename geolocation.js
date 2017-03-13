@@ -10,22 +10,43 @@ let markersCoordinates = [];
 
 let map;
 
+let notification = new Audio('bip.wav');
+let streetViewService = new google.maps.StreetViewService();
+let STREET_VIEW_MAXDISTANCE = 200;
+
 function initMap(){
   let colima = { lat: 19.2453576, lng: -103.7317546 };
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 13,
     center: colima
   });
+  changeStreetView(colima, map);
 
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event){
     if(countMarkersInMap < maxMarkersInMap){ // user cant set more than 3 markers
+      notification.play();
       addMarker(event.latLng, map);
       countMarkersInMap++;
+      changeStreetView(event.latLng, map);
     }else{
       alert("There already 3 markers in map");
     }
   });
+}
+
+function changeStreetView(location, map) {
+  streetViewService.getPanoramaByLocation(location, STREET_VIEW_MAXDISTANCE, checkPanorama);
+}
+
+function checkPanorama(data, status) {
+  if (status == google.maps.StreetViewStatus.OK) {
+    let panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'));
+    panorama.setPano(data.location.pano);
+    panorama.setVisible(true);
+  } else {
+    console.error('Street View data not found for this location.');
+  }
 }
 
 // Adds a marker to the map.
@@ -72,19 +93,19 @@ function printDistance(){
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2){
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1);
-  var a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+  ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
   var d = R * c; // Distance in km
   return d;
 }
 
 function deg2rad(deg){
-  return deg * (Math.PI/180)
+  return deg * (Math.PI/180);
 }
 
 

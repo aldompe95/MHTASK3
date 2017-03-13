@@ -1,3 +1,35 @@
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCybD9Dz8BnIe4y8tcfkpsUeaTY8ORggCY",
+  authDomain: "flawless-sorter-160721.firebaseapp.com",
+  databaseURL: "https://flawless-sorter-160721.firebaseio.com",
+  storageBucket: "flawless-sorter-160721.appspot.com",
+  messagingSenderId: "1014964712512"
+};
+firebase.initializeApp(config);
+
+// Get a reference to the database service
+var database = firebase.database();
+
+// Save locations in db
+function writeMarkers(markers) {
+  let marker1 = `${markers[0].lat()}, ${markers[0].lng()}`;
+  let marker2 = `${markers[1].lat()}, ${markers[1].lng()}`;
+  let marker3 = `${markers[2].lat()}, ${markers[2].lng()}`;
+  firebase.database().ref('markers/' ).push({
+    location1: marker1,
+    location2: marker2,
+    location3: marker3
+  });
+}
+
+function getLocationsFromDb(){
+  var getLocations = firebase.database().ref('markers/');
+  getLocations.on('value', function(markers) {
+    console.log(markers.val());
+  });
+}
+
 // Markers feature
 let labels = 'ABC';
 let labelIndex = 0;

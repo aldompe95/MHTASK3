@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDfQ1HXyCuRC0PLH8__bnR49kdmjNzObo"></script>
     <script type="text/javascript" src="geolocation.js"></script>
   </head>
@@ -42,6 +43,7 @@
               <div class="col s4 offset-s4">
                 <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
                 <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
+                <button class="btn orange waves-effect waves-light" onclick="writeMarkers(markersCoordinates)">Save markers</button>
               </div>
               <div>
                 <ul id="output" class="collection col s6 offset-s3 grey lighten-3">

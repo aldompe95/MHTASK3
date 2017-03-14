@@ -161,7 +161,8 @@ function drawLines(){
   });
   line.setMap(map);
 }
-
+// Removes the lines and also removes the unordered list of points
 function removeLines(){
   line.setMap(null);
+  document.querySelector('#output').innerHTML = "";
 }

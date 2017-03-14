@@ -36,7 +36,7 @@ function getLocationsFromDb(){
 function printMenuOfLocations(){
   let html = '<table><tr><th>ID</th><th>Point A</th><th>Point B</th><th>Point C</th></tr>';
   locationsDB.map((locations, i) =>{
-    html += `<tr><td class="setDbMarkers" id="${i}"><button class="btn orange waves-effect waves-light">setMap</button></td><td>${locations.location1}</td><td>${locations.location2}</td><td>${locations.location3}</td></tr>`;
+    html += `<tr><td class="setDbMarkers"><button id="${i}" class="btn orange waves-effect waves-light" onClick="drawSavedCoordinates(this.id)">setMap</button></td><td>${locations.location1}</td><td>${locations.location2}</td><td>${locations.location3}</td></tr>`;
   });
   html += '</table>';
   document.querySelector('.savedMarkers').innerHTML = html;
@@ -165,4 +165,31 @@ function drawLines(){
 function removeLines(){
   line.setMap(null);
   document.querySelector('#output').innerHTML = "";
+}
+
+//Draws the coordinates of the button selected
+function drawSavedCoordinates(buttonId){
+  actualMarkers = locationsDB[buttonId];
+  if (countMarkersInMap === 3) {
+    deleteMarkers();
+    addMarker(getLatLngFromString(actualMarkers["location1"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location2"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location3"]), map);
+    countMarkersInMap++;
+  } else {
+    addMarker(getLatLngFromString(actualMarkers["location1"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location2"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location3"]), map);
+    countMarkersInMap++;
+  }
+  printDistance();
+}
+//Parse string coordinates to latln object
+function getLatLngFromString(ll) {
+    var latlng = ll.split(/, ?/)
+    return new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
 }

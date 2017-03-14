@@ -7,6 +7,7 @@
     <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDfQ1HXyCuRC0PLH8__bnR49kdmjNzObo"></script>
     <script type="text/javascript" src="geolocation.js"></script>
   </head>
@@ -30,19 +31,37 @@
             <div class="section">
               <h1 class="header center orange-text">MagmaHackers third assignment</h1>
               <h3 class="center orange-text">Map, geolocation and more</h3>
+              <h6 class="center orange-text">Instructions of this webpage: </h6>
+              <p class="left">
+                <ul class="collection">
+                  <li class="collection-item">You can use some of the points stored in the database, clicking in the "Print saved markers" button
+                      will list such points, clicking its "setMap" button will draw them in the map and automatically
+                      will calculate the distance between those points
+                  </li>
+                  <li class="collection-item">
+                    If you do not want to use stored points, just click in the google maps panel, street view will update for every point done
+                    if there is information of that point, also each click triggers a bell, after reaching 3 points you can calculate the distance,
+                    delete the markers or even save the markers depending what button you choose.
+                  </li>
+                </ul>
+              </p>
+            </div>
+            <div class="section">
+
             </div>
           </header>
           <div class="divider"></div>
           <!-- Map section -->
-          <main>
+          <main class="section center-align">
+            <button class="btn orange waves-effect waves-light" onclick="printMenuOfLocations()">Print saved markers</button>
+            <div class="savedMarkers"></div>
             <div class="section">
               <div id="map"></div>
               <div id="pano"></div>
               <br>
-              <div class="col s4 offset-s4">
-                <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
-                <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
-              </div>
+              <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
+              <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
+              <button class="btn orange waves-effect waves-light" onclick="writeMarkers(markersCoordinates)">Save markers</button>
               <div>
                 <ul id="output" class="collection col s6 offset-s3 grey lighten-3">
                 </ul>

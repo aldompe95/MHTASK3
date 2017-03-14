@@ -1,3 +1,54 @@
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCybD9Dz8BnIe4y8tcfkpsUeaTY8ORggCY",
+  authDomain: "flawless-sorter-160721.firebaseapp.com",
+  databaseURL: "https://flawless-sorter-160721.firebaseio.com",
+  storageBucket: "flawless-sorter-160721.appspot.com",
+  messagingSenderId: "1014964712512"
+};
+firebase.initializeApp(config);
+
+// Get a reference to the database service
+var database = firebase.database();
+
+// Save locations in db
+function writeMarkers(markers) {
+  let marker1 = `${markers[0].lat()}, ${markers[0].lng()}`;
+  let marker2 = `${markers[1].lat()}, ${markers[1].lng()}`;
+  let marker3 = `${markers[2].lat()}, ${markers[2].lng()}`;
+  firebase.database().ref('markers/' ).push({
+    location1: marker1,
+    location2: marker2,
+    location3: marker3
+  });
+  printMenuOfLocations();
+}
+
+// variable for the locations of the db
+let locationsDB = [];
+function getLocationsFromDb(){
+  var getLocations = firebase.database().ref('markers/');
+  getLocations.on('child_added', markers => {
+    locationsDB.push(markers.val());
+  });
+}
+
+function printMenuOfLocations(){
+  let html = '<table><tr><th>ID</th><th>Point A</th><th>Point B</th><th>Point C</th></tr>';
+  locationsDB.map((locations, i) =>{
+    html += `<tr><td class="setDbMarkers"><button id="${i}" class="btn orange waves-effect waves-light" onClick="drawSavedCoordinates(this.id)">setMap</button></td><td>${locations.location1}</td><td>${locations.location2}</td><td>${locations.location3}</td></tr>`;
+  });
+  html += '</table>';
+  document.querySelector('.savedMarkers').innerHTML = html;
+
+  let dbMarkers = document.querySelectorAll('.setDbMarkers');
+  [].forEach.call(dbMarkers, function(marker){
+    marker.addEventListener('click', evt => {
+      console.log(this);
+    });
+  });
+}
+
 // Markers feature
 let labels = 'ABC';
 let labelIndex = 0;
@@ -21,7 +72,7 @@ function initMap(){
     center: colima
   });
   changeStreetView(colima, map);
-
+  getLocationsFromDb();
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event){
     if(countMarkersInMap < maxMarkersInMap){ // user cant set more than 3 markers
@@ -70,6 +121,7 @@ function deleteMarkers() {
   markers = [];
   markersCoordinates = [];
   countMarkersInMap = 0;
+  removeLines();
 }
 
 google.maps.event.addDomListener(window, 'load', initMap);
@@ -91,15 +143,16 @@ function printDistance(){
 
 function getDistanceFromLatLonInKm(pointA, pointB){
   let distanceInM = google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
-  const metersInKm = 1000; 
+  const metersInKm = 1000;
   let distanceInKm = distanceInM / metersInKm;
   return distanceInKm;
 }
 
+let line;
 // DrawLines feature
 function drawLines(){
   markersCoordinates.push(markersCoordinates[0]);
-  let line = new google.maps.Polyline({
+  line = new google.maps.Polyline({
     path: markersCoordinates,
     geodesic: true,
     strokeColor: '#FF0000',
@@ -107,4 +160,36 @@ function drawLines(){
     strokeWeight: 2
   });
   line.setMap(map);
+}
+// Removes the lines and also removes the unordered list of points
+function removeLines(){
+  line.setMap(null);
+  document.querySelector('#output').innerHTML = "";
+}
+
+//Draws the coordinates of the button selected
+function drawSavedCoordinates(buttonId){
+  actualMarkers = locationsDB[buttonId];
+  if (countMarkersInMap === 3) {
+    deleteMarkers();
+    addMarker(getLatLngFromString(actualMarkers["location1"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location2"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location3"]), map);
+    countMarkersInMap++;
+  } else {
+    addMarker(getLatLngFromString(actualMarkers["location1"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location2"]), map);
+    countMarkersInMap++;
+    addMarker(getLatLngFromString(actualMarkers["location3"]), map);
+    countMarkersInMap++;
+  }
+  printDistance();
+}
+//Parse string coordinates to latln object
+function getLatLngFromString(ll) {
+    var latlng = ll.split(/, ?/)
+    return new google.maps.LatLng(parseFloat(latlng[0]), parseFloat(latlng[1]));
 }

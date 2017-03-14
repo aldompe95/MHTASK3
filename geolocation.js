@@ -21,13 +21,30 @@ function writeMarkers(markers) {
     location2: marker2,
     location3: marker3
   });
+  printMenuOfLocations();
 }
 
+// variable for the locations of the db
+let locationsDB = [];
 function getLocationsFromDb(){
   var getLocations = firebase.database().ref('markers/');
-  getLocations.on('value', function(markers) {
-    console.log(markers.val());
+  getLocations.on('child_added', markers => {
+    locationsDB.push(markers.val());
   });
+}
+
+function printMenuOfLocations(){
+  let html = '<table><tr><th>ID</th><th>Point A</th><th>Point B</th><th>Point C</th></tr>';
+  locationsDB.map((locations, i) =>{
+    html += `<tr><td class="setDbMarkers" id="${i}"><button>setMap</button></td><td>${locations.location1}</td><td>${locations.location2}</td><td>${locations.location3}</td></tr>`;
+  });
+  html += '</table>';
+  document.querySelector('.savedMarkers').innerHTML = html;
+
+  /*let dbMarkers = document.querySelectorAll('.setDbMarkers');
+  dbMarkers.addEventListener('click', evt => {
+    console.log(this);
+  });*/ // here
 }
 
 // Markers feature
@@ -53,7 +70,7 @@ function initMap(){
     center: colima
   });
   changeStreetView(colima, map);
-
+  getLocationsFromDb();
   // This event listener calls addMarker() when the map is clicked.
   google.maps.event.addListener(map, 'click', function(event){
     if(countMarkersInMap < maxMarkersInMap){ // user cant set more than 3 markers
@@ -102,6 +119,7 @@ function deleteMarkers() {
   markers = [];
   markersCoordinates = [];
   countMarkersInMap = 0;
+  removeLines();
 }
 
 google.maps.event.addDomListener(window, 'load', initMap);
@@ -128,10 +146,11 @@ function getDistanceFromLatLonInKm(pointA, pointB){
   return distanceInKm;
 }
 
+let line;
 // DrawLines feature
 function drawLines(){
   markersCoordinates.push(markersCoordinates[0]);
-  let line = new google.maps.Polyline({
+  line = new google.maps.Polyline({
     path: markersCoordinates,
     geodesic: true,
     strokeColor: '#FF0000',
@@ -139,4 +158,8 @@ function drawLines(){
     strokeWeight: 2
   });
   line.setMap(map);
+}
+
+function removeLines(){
+  line.setMap(null);
 }

@@ -41,10 +41,12 @@ function printMenuOfLocations(){
   html += '</table>';
   document.querySelector('.savedMarkers').innerHTML = html;
 
-  /*let dbMarkers = document.querySelectorAll('.setDbMarkers');
-  dbMarkers.addEventListener('click', evt => {
-    console.log(this);
-  });*/ // here
+  let dbMarkers = document.querySelectorAll('.setDbMarkers');
+  [].forEach.call(dbMarkers, function(marker){
+    marker.addEventListener('click', evt => {
+      console.log(this);
+    });
+  });
 }
 
 // Markers feature

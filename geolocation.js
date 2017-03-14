@@ -36,7 +36,7 @@ function getLocationsFromDb(){
 function printMenuOfLocations(){
   let html = '<table><tr><th>ID</th><th>Point A</th><th>Point B</th><th>Point C</th></tr>';
   locationsDB.map((locations, i) =>{
-    html += `<tr><td class="setDbMarkers" id="${i}"><button>setMap</button></td><td>${locations.location1}</td><td>${locations.location2}</td><td>${locations.location3}</td></tr>`;
+    html += `<tr><td class="setDbMarkers" id="${i}"><button class="btn orange waves-effect waves-light">setMap</button></td><td>${locations.location1}</td><td>${locations.location2}</td><td>${locations.location3}</td></tr>`;
   });
   html += '</table>';
   document.querySelector('.savedMarkers').innerHTML = html;
@@ -143,7 +143,7 @@ function printDistance(){
 
 function getDistanceFromLatLonInKm(pointA, pointB){
   let distanceInM = google.maps.geometry.spherical.computeDistanceBetween(pointA, pointB);
-  const metersInKm = 1000; 
+  const metersInKm = 1000;
   let distanceInKm = distanceInM / metersInKm;
   return distanceInKm;
 }

@@ -33,22 +33,21 @@
               <h3 class="center orange-text">Map, geolocation and more</h3>
             </div>
             <div class="section">
-              <button class="btn orange waves-effect waves-light" onclick="printMenuOfLocations()">Print saved markers</button>
-              <div class="savedMarkers"></div>
+
             </div>
           </header>
           <div class="divider"></div>
           <!-- Map section -->
-          <main>
+          <main class="section center-align">
+            <button class="btn orange waves-effect waves-light" onclick="printMenuOfLocations()">Print saved markers</button>
+            <div class="savedMarkers"></div>
             <div class="section">
               <div id="map"></div>
               <div id="pano"></div>
               <br>
-              <div class="col s4 offset-s4">
-                <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
-                <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
-                <button class="btn orange waves-effect waves-light" onclick="writeMarkers(markersCoordinates)">Save markers</button>
-              </div>
+              <button class="btn orange waves-effect waves-light" onclick="printDistance()">Get distance</button>
+              <button class="btn orange waves-effect waves-light" onclick="deleteMarkers()">Delete markers</button>
+              <button class="btn orange waves-effect waves-light" onclick="writeMarkers(markersCoordinates)">Save markers</button>
               <div>
                 <ul id="output" class="collection col s6 offset-s3 grey lighten-3">
                 </ul>
